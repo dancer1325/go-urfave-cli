@@ -5,9 +5,14 @@
 [![codecov][codecov_badge]][codecov_link]
 [![Tests status][test_badge]][test_link]
 
-urfave/cli is a **declarative**, simple, fast, and fun package for building
-command line tools in Go featuring:
+* urfave/cli
+  * CL tools | Go featuring
+    * **declarative**
+    * simple,
+    * fast,
+    * fun package -- for -- building
 
+* TODO: 
 - commands and subcommands with alias and prefix match support
 - flexible and permissive help system
 - dynamic shell completion for `bash`, `zsh`, `fish`, and `powershell`
@@ -25,21 +30,14 @@ command line tools in Go featuring:
 
 ## Documentation
 
-See the hosted documentation website at <https://cli.urfave.org>. Contents of
-this website are built from the [`./docs`](./docs) directory.
+* hosted [here](https://cli.urfave.org)
+* ["./docs"](./docs)
 
 ## Support
 
-Check the [Q&A discussions]. If you don't find answer to your question, [create
-a new discussion].
+* [Q&A discussions](https://github.com/urfave/cli/discussions/categories/q-a)
+* [issues](https://github.com/urfave/cli/issues/new/choose)
 
-If you found a bug or have a feature request, [create a new issue].
-
-Please keep in mind that this project is run by unpaid volunteers.
-
-### License
-
-See [`LICENSE`](./LICENSE).
 
 [test_badge]: https://github.com/urfave/cli/actions/workflows/test.yml/badge.svg
 [test_link]: https://github.com/urfave/cli/actions/workflows/test.yml
@@ -49,8 +47,6 @@ See [`LICENSE`](./LICENSE).
 [goreportcard_link]: https://goreportcard.com/report/github.com/urfave/cli/v3
 [codecov_badge]: https://codecov.io/gh/urfave/cli/branch/main/graph/badge.svg?token=t9YGWLh05g
 [codecov_link]: https://codecov.io/gh/urfave/cli
-[Q&A discussions]: https://github.com/urfave/cli/discussions/categories/q-a
 [create a new discussion]: https://github.com/urfave/cli/discussions/new?category=q-a
 [urfave/cli-docs]: https://github.com/urfave/cli-docs
 [urfave/cli-altsrc]: https://github.com/urfave/cli-altsrc
-[create a new issue]: https://github.com/urfave/cli/issues/new/choose
