@@ -1,32 +1,34 @@
 # Welcome to urfave/cli
 
-[![Go Reference][goreference_badge]][goreference_link]
-[![Go Report Card][goreportcard_badge]][goreportcard_link]
-[![codecov][codecov_badge]][codecov_link]
-[![Tests status][test_badge]][test_link]
-
 * urfave/cli
-  * CL tools | Go featuring
+  * == CL tool / 
     * **declarative**
     * simple,
     * fast,
     * fun package -- for -- building
-
-* TODO: 
-- commands and subcommands with alias and prefix match support
-- flexible and permissive help system
-- dynamic shell completion for `bash`, `zsh`, `fish`, and `powershell`
-- no dependencies except Go standard library
-- input flags for simple types, slices of simple types, time, duration, and
-  others
-- compound short flag support (`-a` `-b` `-c` can be shortened to `-abc`)
-- documentation generation in `man` and Markdown (supported via the
-  [`urfave/cli-docs`][urfave/cli-docs] module)
-- input lookup from:
-  - environment variables
-  - plain text files
-  - structured file formats (supported via the
-    [`urfave/cli-altsrc`][urfave/cli-altsrc] module)
+    * Go features
+      - commands & subcommands / have
+        - alias
+        - prefix match support
+      - help system
+      - dynamic shell completion -- for -- `bash`, `zsh`, `fish`, & `powershell`
+      - ❌NO external dependencies❌
+        - EXCEPT to Go standard library
+      - input flags -- for --
+        - simple types,
+        - slices of simple types,
+        - time,
+        - duration
+        - ...
+      - compound short flag support
+        - _Example:_ `-a` `-b` `-c` can be shortened -- to -- `-abc`
+      - documentation generation in `man` and Markdown
+        - -- via -- [`urfave/cli-docs` module](https://github.com/urfave/cli-docs)
+      - input lookup -- from --
+        - environment variables
+        - plain text files
+        - structured file formats
+          - -- via -- [`urfave/cli-altsrc` module](https://github.com/urfave/cli-altsrc)
 
 ## Documentation
 
@@ -37,16 +39,3 @@
 
 * [Q&A discussions](https://github.com/urfave/cli/discussions/categories/q-a)
 * [issues](https://github.com/urfave/cli/issues/new/choose)
-
-
-[test_badge]: https://github.com/urfave/cli/actions/workflows/test.yml/badge.svg
-[test_link]: https://github.com/urfave/cli/actions/workflows/test.yml
-[goreference_badge]: https://pkg.go.dev/badge/github.com/urfave/cli/v3.svg
-[goreference_link]: https://pkg.go.dev/github.com/urfave/cli/v3
-[goreportcard_badge]: https://goreportcard.com/badge/github.com/urfave/cli/v3
-[goreportcard_link]: https://goreportcard.com/report/github.com/urfave/cli/v3
-[codecov_badge]: https://codecov.io/gh/urfave/cli/branch/main/graph/badge.svg?token=t9YGWLh05g
-[codecov_link]: https://codecov.io/gh/urfave/cli
-[create a new discussion]: https://github.com/urfave/cli/discussions/new?category=q-a
-[urfave/cli-docs]: https://github.com/urfave/cli-docs
-[urfave/cli-altsrc]: https://github.com/urfave/cli-altsrc
