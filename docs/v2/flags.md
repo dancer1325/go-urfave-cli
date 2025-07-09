@@ -5,51 +5,15 @@ search:
   boost: 2
 ---
 
-Setting and querying flags is simple.
+* goal
+  * set & query flags
 
-<!-- {
-  "output": "Hello Nefertiti"
-} -->
-```go
-package main
+* _Examples:_
+  * _Example1:_ [flag1](examples/flag1.go)
+    * `go run examples/flag1.go`
+      * run it
 
-import (
-	"fmt"
-	"log"
-	"os"
-
-	"github.com/urfave/cli/v2"
-)
-
-func main() {
-	app := &cli.App{
-		Flags: []cli.Flag{
-			&cli.StringFlag{
-				Name:  "lang",
-				Value: "english",
-				Usage: "language for the greeting",
-			},
-		},
-		Action: func(cCtx *cli.Context) error {
-			name := "Nefertiti"
-			if cCtx.NArg() > 0 {
-				name = cCtx.Args().Get(0)
-			}
-			if cCtx.String("lang") == "spanish" {
-				fmt.Println("Hola", name)
-			} else {
-				fmt.Println("Hello", name)
-			}
-			return nil
-		},
-	}
-
-	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
-	}
-}
-```
-
+* TODO: 
 You can also set a destination variable for a flag, to which the content will be
 scanned. Note that if the `Value` is set for the flag, it will be shown as default,
 and destination will be set to this value before parsing flag on the command line.
