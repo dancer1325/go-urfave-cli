@@ -31,7 +31,7 @@ import (
 ### Using `v2` releases
 
 * | new development,
-  * recommended version
+  * 👀recommended version👀
 
 * ongoing maintenance (**minor** improvements, bug fixes, and security fixes) | [`v2-maint` branch](https://github.com/urfave/cli/tree/v2-maint) 
 
@@ -56,8 +56,11 @@ you need help with the migration to `v2`.
 
 ### Supported platforms
 
-cli is tested against multiple versions of Go on Linux, and against the latest
-released version of Go on OS X and Windows. This project uses GitHub Actions
-for builds. To see our currently supported go versions and platforms, look at
-the [github workflow
-configuration](https://github.com/urfave/cli/blob/main/.github/workflows/test.yml).
+* MULTIPLE versions of Go 
+  * | 
+    * Linux,
+    * OS X
+    * Windows
+  * see [here](/.github/workflows/test.yml) 
+
+* builds -- via -- GitHub Actions
