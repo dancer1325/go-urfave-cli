@@ -1,17 +1,14 @@
 # Migration Guide: v1 to v2
 
-v2 has a number of breaking changes but converting is relatively
-straightforward: make the changes documented below then resolve any
-compiler errors. We hope this will be sufficient for most typical
-users.
+* steps
+  * follow this guide
+  * resolve the compiler errors
 
-If you find any issues not covered by this document, please post a
-comment on [Issue 921](https://github.com/urfave/cli/issues/921) or
-consider sending a PR to help improve this guide.
+* if you find issues / NOT covered | here -> add comment | [Issue 921](https://github.com/urfave/cli/issues/921)
 
 ## Flags before args
 
-In v2 flags must come before args. This is more POSIX-compliant.  You
+* TODO:In v2 flags must come before args. This is more POSIX-compliant.  You
 may need to update scripts, user documentation, etc.
 
 This will work:
