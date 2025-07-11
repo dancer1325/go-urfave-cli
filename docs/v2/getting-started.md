@@ -11,11 +11,11 @@ search:
     * little -- as -- 1 line of code | `main()`
 
 * _Examples:_
-  * _Example1:_ ["getting-started.go"](getting-started.go)
+  * _Example1:_ ["getting-started.go"](examples/getting-started.go)
     * how to run?
       * `go build getting-started.go`
       * `./getting-started`
-  * _Example2:_ ["getting-started-with-action.go"](getting-started-with-action.go)
+  * _Example2:_ ["getting-started-with-action.go"](examples/getting-started-with-action.go)
     * support
       * subcommands
       * flags
