@@ -5,146 +5,61 @@ search:
   boost: 2
 ---
 
-You can enable completion commands by setting the `EnableBashCompletion` flag on
-the `App` object to `true`.  By default, this setting will allow auto-completion
-for an app's subcommands, but you can write your own completion methods for the
-App or its subcommands as well.
+* goal
+  * enable completion commands 
+
+* steps
+  * `App.EnableBashCompletion: true`
 
 #### Default auto-completion
 
-```go
-package main
+* by default, enabled | app's subcommands
+* _Example:_ [here](examples/bash-autocompletion-default.go)
+  * `go build examples/bash-autocompletion-default.go`
+  * `./bash-autocompletion-default` + tab key
+    * Problems:
+      * Problem1: Why does bash autocompletion NOT work?
+        * Attempt1: 
+          * `./bash-autocompletion-default --generate-bash-completion > defaultcompletion.sh`
+          * `source defaultcompletion.sh`
+        * Attempt2:
+          * create manually ["simple_completion.sh"](examples/simple_completion.sh)
+          * `source examples/simple_completion.sh`
+          * `./bash-autocompletion-default` + tab key
+            * NOT work
+        * Solution: TODO: ❓
 
-import (
-	"fmt"
-	"log"
-	"os"
-
-	"github.com/urfave/cli/v2"
-)
-
-func main() {
-	app := &cli.App{
-		EnableBashCompletion: true,
-		Commands: []*cli.Command{
-			{
-				Name:    "add",
-				Aliases: []string{"a"},
-				Usage:   "add a task to the list",
-				Action: func(cCtx *cli.Context) error {
-					fmt.Println("added task: ", cCtx.Args().First())
-					return nil
-				},
-			},
-			{
-				Name:    "complete",
-				Aliases: []string{"c"},
-				Usage:   "complete a task on the list",
-				Action: func(cCtx *cli.Context) error {
-					fmt.Println("completed task: ", cCtx.Args().First())
-					return nil
-				},
-			},
-			{
-				Name:    "template",
-				Aliases: []string{"t"},
-				Usage:   "options for task templates",
-				Subcommands: []*cli.Command{
-					{
-						Name:  "add",
-						Usage: "add a new template",
-						Action: func(cCtx *cli.Context) error {
-							fmt.Println("new task template: ", cCtx.Args().First())
-							return nil
-						},
-					},
-					{
-						Name:  "remove",
-						Usage: "remove an existing template",
-						Action: func(cCtx *cli.Context) error {
-							fmt.Println("removed task template: ", cCtx.Args().First())
-							return nil
-						},
-					},
-				},
-			},
-		},
-	}
-
-	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
-	}
-}
-```
-![](images/default-bash-autocomplete.gif)
+          ![](images/default-bash-autocomplete.gif)
 
 #### Custom auto-completion
-<!-- {
-  "args": ["complete", "&#45;&#45;generate&#45;bash&#45;completion"],
-  "output": "laundry"
-} -->
-```go
-package main
 
-import (
-	"fmt"
-	"log"
-	"os"
+* `BashComplete: func ()`
+  * write your OWN completion methods -- for --
+    * the App OR
+    * its subcommands
 
-	"github.com/urfave/cli/v2"
-)
-
-func main() {
-	tasks := []string{"cook", "clean", "laundry", "eat", "sleep", "code"}
-
-	app := &cli.App{
-		EnableBashCompletion: true,
-		Commands: []*cli.Command{
-			{
-				Name:    "complete",
-				Aliases: []string{"c"},
-				Usage:   "complete a task on the list",
-				Action: func(cCtx *cli.Context) error {
-					fmt.Println("completed task: ", cCtx.Args().First())
-					return nil
-				},
-				BashComplete: func(cCtx *cli.Context) {
-					// This will complete if no args are passed
-					if cCtx.NArg() > 0 {
-						return
-					}
-					for _, t := range tasks {
-						fmt.Println(t)
-					}
-				},
-			},
-		},
-	}
-
-	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
-	}
-}
-```
-![](images/custom-bash-autocomplete.gif)
+* _Example:_ [here](examples/bash-autocompletion-custom.go)
+  * `go build bash-autocompletion-custom.go`
+  * `./bash-autocompletion-custom` + + tab key
+    * ❌NOT work❌
+  
+      ![](images/custom-bash-autocomplete.gif)
 
 #### Enabling
 
-To enable auto-completion for the current shell session, a bash script,
-`autocomplete/bash_autocomplete` is included in this repo.
-
-To use `autocomplete/bash_autocomplete` set an environment variable named `PROG`
-to the name of your program and then `source` the
-`autocomplete/bash_autocomplete` file.
-
-For example, if your cli program is called `myprogram`:
-
-```sh-session
-$ PROG=myprogram source path/to/cli/autocomplete/bash_autocomplete
-```
-
-Auto-completion is now enabled for the current shell, but will not persist into
-a new shell.
+* ["autocomplete/bash_autocomplete"](/autocomplete/bash_autocomplete)
+  * bash script /
+    * ⚠️| CURRENT (ONLY) shell session,⚠️
+      * enable auto-completion 
+  * steps to use | SAME shell
+    * `export PROG=nameOfYourProgram`
+      * _Example:_ `export PROG=bash-autocompletion-default`
+    * `source ../../../autocomplete/bash_autocomplete`
+      * Problems:
+        * Problem1: "bash_autocomplete:7: no matches found: __%[1]s_init_completion"
+          * Attempt1: `PROG=bash-autocompletion-default && source ../../../autocomplete/bash_autocomplete`
+          * Attempt2: `export PROG=bash-autocompletion-default && source ../../../autocomplete/bash_autocomplete`
+          * Solution: TODO: ❓
 
 #### Distribution and Persistent Autocompletion
 
