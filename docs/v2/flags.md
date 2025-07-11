@@ -10,156 +10,49 @@ search:
 
 * _Examples:_
   * _Example1:_ [flag1](examples/flag1.go)
+    * `Name`
+      * == flag name
+    * `Value`
+      * == default flag value
+    * `go run examples/flag2.go --help`
+      * `--help`
+        * 👀built-in flag👀
     * `go run examples/flag1.go`
-      * run it
-
-* TODO: 
-You can also set a destination variable for a flag, to which the content will be
-scanned. Note that if the `Value` is set for the flag, it will be shown as default,
-and destination will be set to this value before parsing flag on the command line.
-
-<!-- {
-  "output": "Hello someone"
-} -->
-```go
-package main
-
-import (
-	"fmt"
-	"log"
-	"os"
-
-	"github.com/urfave/cli/v2"
-)
-
-func main() {
-	var language string
-
-	app := &cli.App{
-		Flags: []cli.Flag{
-			&cli.StringFlag{
-				Name:        "lang",
-				Value:       "english",
-				Usage:       "language for the greeting",
-				Destination: &language,
-			},
-		},
-		Action: func(cCtx *cli.Context) error {
-			name := "someone"
-			if cCtx.NArg() > 0 {
-				name = cCtx.Args().Get(0)
-			}
-			if language == "spanish" {
-				fmt.Println("Hola", name)
-			} else {
-				fmt.Println("Hello", name)
-			}
-			return nil
-		},
-	}
-
-	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
-	}
-}
-```
-
-See full list of flags at https://pkg.go.dev/github.com/urfave/cli/v2
-
-For bool flags you can specify the flag multiple times to get a count(e.g -v -v -v or -vvv)
-
-> If you want to support the `-vvv` flag, you need to set `App.UseShortOptionHandling`.
-
-<!-- {
-  "args": ["&#45;&#45;foo", "&#45;&#45;foo", "&#45;fff",  "&#45;f"],
-  "output": "count 6"  
-} -->
-```go
-package main
-
-import (
-	"fmt"
-	"log"
-	"os"
-
-	"github.com/urfave/cli/v2"
-)
-
-func main() {
-	var count int
-
-	app := &cli.App{
-		UseShortOptionHandling: true,
-		Flags: []cli.Flag{
-			&cli.BoolFlag{
-				Name:        "foo",
-				Usage:       "foo greeting",
-				Aliases:     []string{"f"},
-				Count: &count,
-			},
-		},
-		Action: func(cCtx *cli.Context) error {
-			fmt.Println("count", count)
-			return nil
-		},
-	}
-
-	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
-	}
-}
-```
+    * `go run examples/flag1.go Alfred`
+      * `Alfred` == CL's argument
+    * `go run examples/flag1.go -lang=spanish`
+      * `lang` == CL's flag
+    * `go run examples/flag1.go -foo`
+      * ⚠️if you pass a NON-existing flag -> exit with error⚠️
+  * _Example2:_ [flag2](examples/flag2.go)
+    * == "flag1" + flag's destination variable
+      * recommendations
+        * 👀use `Destination` -- rather than -- `cCtx.String("langName")`👀
+  * _Example3:_ [flag3](examples/flag3.go)
+    * `Count`
+      * == # of times / flag is passed
+      * `go run examples/flag3.go -foo -foo`
+    * `UseShortOptionHandling: true` + `Aliases`
+      * specify short name for flags
+      * `go run examples/flag3.go -f`
 
 #### Placeholder Values
 
-Sometimes it's useful to specify a flag's value within the usage string itself.
-Such placeholders are indicated with back quotes.
+* `Usage: "... `placeHolderValue1`...`placeHolderValue2`"`
+  * ⚠️ONLY used `placeHolderValue1`⚠️
+  * == requirements
+    * back-quotes -- `` -- 
 
-For example this:
-
-<!-- {
-  "args": ["&#45;&#45;help"],
-  "output": "&#45;&#45;config FILE, &#45;c FILE"
-} -->
-```go
-package main
-
-import (
-	"log"
-	"os"
-
-	"github.com/urfave/cli/v2"
-)
-
-func main() {
-	app := &cli.App{
-		Flags: []cli.Flag{
-			&cli.StringFlag{
-				Name:    "config",
-				Aliases: []string{"c"},
-				Usage:   "Load configuration from `FILE`",
-			},
-		},
-	}
-
-	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
-	}
-}
-```
-
-Will result in help output like:
-
-```
---config FILE, -c FILE   Load configuration from FILE
-```
-
-Note that only the first placeholder is used. Subsequent back-quoted words will
-be left as-is.
+* _Example:_ [here](examples/flag-placeholder-values.go)
+  * `go run examples/flag-placeholder-values.go -help`
+    * output
+      * "--config FILE"
+      * "--configmultiple FILE, --cm FILE"
+        * ONLY the FIRST one
 
 #### Alternate Names
 
-You can set alternate (or short) names for flags by providing a comma-delimited
+* TODO:You can set alternate (or short) names for flags by providing a comma-delimited
 list for the `Name`. e.g.
 
 <!-- {
