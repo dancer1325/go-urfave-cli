@@ -259,7 +259,7 @@ In the above case the Envs are checked first and if not found then files are loo
 
 ## cli.Context has been removed
 
-All functions handled previously by `cli.Context` have been incorporated into `cli.Command`:
+* ⚠️`cli.Context`'s functions have been migrated -- to -- `cli.Command`'s functions⚠️
 
 | v2                           | v3                           |
 |------------------------------|------------------------------|
